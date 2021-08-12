@@ -24,7 +24,9 @@ pipeline {
         }
         stage('dockerpush') {
             steps {
-                sh 'docker login --username "ptemghare" --password "Sony@1902" docker.io'
+                withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhubpwd')]) {
+                sh 'docker login --username "ptemghare" --password ${dockerhubpwd} docker.io'
+                }
                 sh 'docker push ptemghare/wordpress:latest'
                 sh 'docker push ptemghare/wordpress:1.0'
             }
