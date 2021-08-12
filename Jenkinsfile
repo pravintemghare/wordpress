@@ -11,7 +11,7 @@ pipeline {
         }
         stage ('dockerbuild') {
             step {
-                sh docker build -t prtemgha/wordpress:latest
+                sh docker build -t prtemgha/wordpress:latest .
             }
         }
         stage ('dockertag') {
