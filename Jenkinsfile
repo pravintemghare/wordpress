@@ -1,5 +1,6 @@
 pipeline {
-    agent_any
+    agent any
+    
     stages {
         stage('GitCheckout') {
             step {
