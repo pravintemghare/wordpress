@@ -24,11 +24,17 @@ pipeline {
         }
         stage('DockerPush') {
             steps {
-                withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
-                sh 'docker login --username "ptemghare" --password ${dockerhubpwd} docker.io'
-                }
+                sh 'docker login --username "ptemghare" --password "Sony@1902" docker.io'
                 sh 'docker push ptemghare/wordpress:latest'
                 sh 'docker push ptemghare/wordpress:1.0'
+            }
+        }
+        stage('DockerDeploy') {
+            steps {
+                def dockerRun = 'docker run -itd -p 80:80 --name wordpess ptemghare/wordpress'
+                sshagent(['sshlogin-dev']) {
+                    sh 'ssh -o StrictHostKeyChecking=no root@192.168.37.178 ${dockerRun}'
+                }     
             }
         }
     }
