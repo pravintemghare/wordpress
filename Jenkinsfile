@@ -4,9 +4,11 @@ pipeline {
     stages {
         stage('GitCheckout') {
             steps {
-                git branch: 'main'
-                    credentailsId: 'github'
+                git(
+                    branch: 'main',
+                    credentailsId: 'github',
                     url: 'https://github.com/pravintemghare/wordpress.git'
+                )    
             }
         }
         stage('dockerbuild') {
