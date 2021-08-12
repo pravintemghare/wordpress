@@ -11,20 +11,20 @@ pipeline {
                 )    
             }
         }
-        stage('dockerbuild') {
+        stage('DockerBuild') {
             steps {
                 sh 'docker build -t ptemghare/wordpress:latest .'
             }
         }
-        stage('dockertag') {
+        stage('DockerTag') {
             steps {
                 sh 'docker tag ptemghare/wordpress:latest ptemghare/wordpress:latest'
                 sh 'docker tag ptemghare/wordpress:latest ptemghare/wordpress:1.0'
             }
         }
-        stage('dockerpush') {
+        stage('DockerPush') {
             steps {
-                withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhubpwd')]) {
+                withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
                 sh 'docker login --username "ptemghare" --password ${dockerhubpwd} docker.io'
                 }
                 sh 'docker push ptemghare/wordpress:latest'
