@@ -13,20 +13,20 @@ pipeline {
         }
         stage('dockerbuild') {
             steps {
-                sh 'docker build -t prtemgha/wordpress:latest .'
+                sh 'docker build -t ptemghare/wordpress:latest .'
             }
         }
         stage('dockertag') {
             steps {
-                sh 'docker tag prtemgha/wordpress:latest prtemgha/wordpress:latest'
-                sh 'docker tag prtemgha/wordpress:latest prtemgha/wordpress:1.0'
+                sh 'docker tag ptemghare/wordpress:latest ptemghare/wordpress:latest'
+                sh 'docker tag ptemghare/wordpress:latest ptemghare/wordpress:1.0'
             }
         }
         stage('dockerpush') {
             steps {
                 sh 'docker login --username "ptemghare" --password "Sony@1902" docker.io'
-                sh 'docker push prtemgha/wordpress:latest'
-                sh 'docker push prtemgha/wordpress:1.0'
+                sh 'docker push ptemghare/wordpress:latest'
+                sh 'docker push ptemghare/wordpress:1.0'
             }
         }
     }
