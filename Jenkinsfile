@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    environment {
+        dockerRun = "docker run -itd -p 80:80 --name wordpess ptemghare/wordpress"
+    }
     stages {
         stage('GitCheckout') {
             steps {
@@ -31,7 +33,6 @@ pipeline {
         }
         stage('DockerDeploy') {
             steps {
-                def dockerRun = 'docker run -itd -p 80:80 --name wordpess ptemghare/wordpress'
                 sshagent(['sshlogin-dev']) {
                     sh 'ssh -o StrictHostKeyChecking=no root@192.168.37.178 ${dockerRun}'
                 }     
