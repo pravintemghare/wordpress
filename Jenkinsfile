@@ -6,7 +6,7 @@ pipeline {
             steps {
                 git(
                     branch: 'main',
-                    credentailsId: 'github',
+                    credentialsId: 'github',
                     url: 'https://github.com/pravintemghare/wordpress.git'
                 )    
             }
